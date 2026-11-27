@@ -10,6 +10,8 @@ import ContactForm from "@/components/ContactForm";
 import ContactChannels, { CONTACT_CHANNEL_KEYS } from "@/components/ContactChannels";
 import RoleRotator from "@/components/RoleRotator";
 import SkillMeter from "@/components/SkillMeter";
+import ProjectFilters from "@/components/ProjectFilters";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import { getSettings, visibleSections, SECTION_DEFS, DEFAULT_SETTINGS, type SiteSettings, type SectionId } from "@/lib/settings";
 import { getContentLocale, pickLocalized } from "@/lib/i18n";
 import {
@@ -43,15 +45,16 @@ async function SobreSection({ settings }: { settings: SiteSettings }) {
     <SectionShell id="sobre" title={t("sobreTitulo")}>
       <div className="grid items-center gap-8 md:grid-cols-[.7fr_1.3fr]">
         <div className="relative mx-auto aspect-square w-64 rounded-[2rem] border-4 border-white bg-gradient-to-br from-sky-200 to-cyan-100 p-2 shadow-xl">
-          <Image src="/images/about.jpg" alt="Gabriel Felipe" fill sizes="256px" className="rounded-[1.5rem] object-cover" onError={(event) => { event.currentTarget.style.display = "none"; }} />
+          <Image src={settings.aboutImage} alt="Gabriel Felipe" fill sizes="256px" className="rounded-[1.5rem] object-cover" onError={(event) => { event.currentTarget.style.display = "none"; }} />
           <span className="pointer-events-none absolute inset-4 -z-10 translate-x-4 translate-y-4 rounded-[2rem] border-2 border-white/90 bg-white/35" />
         </div>
         <GlassCard>
           <h3 className="font-display text-2xl font-bold">{locale === "en" ? "Full-Stack Developer & Digital Influencer" : locale === "es" ? "Desarrollador Full-Stack e Influenciador Digital" : "Desenvolvedor Full-Stack e Influenciador Digital"}</h3>
           <p className="mt-4 whitespace-pre-line leading-relaxed text-[#173b59]">{pickLocalized(settings.aboutText, settings.aboutTextEn, locale, settings.aboutTextEs)}</p>
           <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
-            {["5+|Projetos", "10+|Clientes", "1+|Anos de experiência", "5+|Tecnologias"].map((item) => <div key={item} className="glass p-4 text-center"><strong className="block font-display text-2xl text-[#0b5ed7]">{item.split("|")[0]}</strong><span className="text-xs font-semibold">{item.split("|")[1]}</span></div>)}
+            {[[5, locale === "en" ? "Projects" : locale === "es" ? "Proyectos" : "Projetos"], [10, locale === "en" ? "Clients" : locale === "es" ? "Clientes" : "Clientes"], [1, locale === "en" ? "Years of experience" : locale === "es" ? "Años de experiencia" : "Anos de experiência"], [5, locale === "en" ? "Technologies" : locale === "es" ? "Tecnologías" : "Tecnologias"]].map(([value, label]) => <div key={label} className="glass p-4 text-center"><strong className="block font-display text-2xl text-[#0b5ed7]"><AnimatedCounter value={Number(value)} /></strong><span className="text-xs font-semibold">{label}</span></div>)}
           </div>
+          <div className="mt-6 flex flex-wrap gap-3"><a href="#contato" className="btn-aero">{t("falarComigo")}</a><a href="#projetos" className="btn-ghost">{t("verProjetos")}</a></div>
         </GlassCard>
       </div>
     </SectionShell>
@@ -67,9 +70,10 @@ async function ProjetosSection() {
   if (projects.length === 0) return null;
   return (
     <SectionShell id="projetos" title={t("projetosTitulo")}>
+      <ProjectFilters />
       <div className="grid gap-6 md:grid-cols-3">
         {projects.map((p) => (
-          <article key={p.id} className="project-card flex h-full flex-col" data-track="project_click">
+          <article key={p.id} className="project-card flex h-full flex-col" data-track="project_click" data-project-category="Full-Stack">
             {p.imageUrl ? <div className="relative h-48 w-full bg-sky-100"><Image src={p.imageUrl} alt={pickLocalized(p.title, p.titleEn, locale)} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" /></div> : null}
             <div className="flex flex-1 flex-col p-6">
               <div className="flex items-start justify-between gap-3"><h3 className="font-display text-xl font-bold">{pickLocalized(p.title, p.titleEn, locale)}</h3><span className="shrink-0 rounded-full bg-sky-100 px-3 py-1 text-xs font-bold text-[#0750c2]">Full-Stack</span></div>
@@ -83,6 +87,7 @@ async function ProjetosSection() {
           </article>
         ))}
       </div>
+      <p id="project-filter-empty" hidden className="mt-6 text-center text-[#234661]">{locale === "en" ? "No projects in this category." : locale === "es" ? "No hay proyectos en esta categoría." : "Nenhum projeto nesta categoria."}</p>
       <div className="mt-8">
         <Link href="/projetos" className="btn-ghost">
           {t("verTodosProjetos")}
@@ -112,9 +117,16 @@ async function ExperienciaSection() {
             </h3>
             <p className="text-[#176dcc]">{e.company}</p>
             {e.description ? (
+              e.role.includes("Influenciador Digital") || e.roleEn?.includes("Digital Influencer") ? (
+                <div className="mt-5 border-t border-sky-100 pt-4">
+                  <div className="mb-4 flex flex-wrap items-center justify-between gap-3"><p className="text-xs font-bold uppercase tracking-wider text-[#176dcc]">{locale === "en" ? "Social Media Strategy" : locale === "es" ? "Estrategia de redes sociales" : "Estratégia de redes sociais"}</p><a href="/videos" className="btn-aero !px-4 !py-2 text-sm">▶ {locale === "en" ? "Video Hub" : locale === "es" ? "Videos" : "Central de Vídeos"}</a></div>
+                  <div className="space-y-3">{pickLocalized(e.description, e.descriptionEn, locale).split("\n").filter(Boolean).map((row) => { const platform = row.split(":")[0]; const icon = ({ YouTube: "▶", "Twitter/X": "𝕏", Pinterest: "P", LinkedIn: "in", Telegram: "➤", Discord: "◉" } as Record<string, string>)[platform] ?? "•"; return <div key={platform} className="flex items-start gap-3 rounded-xl bg-white/55 p-3"><span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-sky-100 font-bold text-[#0750c2]">{icon}</span><p className="text-sm text-[#234661]">{row}</p></div>; })}</div>
+                </div>
+              ) : (
               <p className="mt-2 max-w-prose text-sm whitespace-pre-line text-[#234661]">
                 {pickLocalized(e.description, e.descriptionEn, locale)}
               </p>
+              )
             ) : null}
             </GlassCard>
           </li>
@@ -221,12 +233,15 @@ async function ContatoSection({ settings }: { settings: SiteSettings }) {
   ]);
   const socials = Object.entries(settings.socials).filter(([, url]) => url);
   // Gmail/LinkedIn/WhatsApp/GitHub are rendered as animated contacts below.
-  const extraSocials = socials.filter(([name]) => !CONTACT_CHANNEL_KEYS.has(name));
+  const extraSocials = socials.filter(([name]) => !CONTACT_CHANNEL_KEYS.has(name) && name !== "youtube" && name !== "x");
   return (
     <section id="contato" className="mx-auto max-w-3xl scroll-mt-28 px-6 pb-28 pt-16">
       <GlassCard>
         <h2 className="text-center font-display text-3xl font-bold md:text-4xl">{t("contatoTitulo")}</h2>
         <p className="mx-auto mt-3 max-w-prose text-center text-[#234661]">{t("contatoTexto")}</p>
+        <div className="mt-8 grid gap-3 sm:grid-cols-3">
+          {[[tc("locationLabel"), settings.location, "⌖"], [tc("emailLabel"), settings.email, "✉"], [tc("phoneLabel"), settings.phone, "☎"]].map(([label, value, icon]) => <div key={label} className="glass flex items-center gap-3 p-4"><span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-sky-100 text-xl text-[#0b5ed7]">{icon}</span><div className="min-w-0"><h3 className="text-xs font-bold uppercase tracking-wide text-[#176dcc]">{label}</h3><p className="truncate text-sm font-semibold">{value}</p></div></div>)}
+        </div>
         <div className="mt-8">
           <ContactForm
             labels={{
@@ -246,6 +261,7 @@ async function ContatoSection({ settings }: { settings: SiteSettings }) {
         <div className="mt-8">
           <ContactChannels socials={settings.socials} email={settings.email} />
         </div>
+        <div className="mt-5 flex justify-center gap-3">{[["YouTube", settings.socials.youtube, "▶"], ["X", settings.socials.x, "𝕏"]].filter(([, url]) => Boolean(url)).map(([name, url, icon]) => <a key={name} href={url} target="_blank" rel="noreferrer" aria-label={name} className="grid h-12 w-12 place-items-center rounded-full border border-white bg-white/75 text-xl font-black text-[#0750c2] shadow">{icon}</a>)}</div>
         {extraSocials.length > 0 ? (
           <div className="mt-8 flex flex-wrap justify-center gap-3 text-sm">
             {extraSocials.map(([name, url]) => (
@@ -308,12 +324,12 @@ export default async function Home() {
 
   return (
     <>
-      <link rel="preload" as="image" href="/images/aero-hero.jpg" fetchPriority="high" />
+      <link rel="preload" as="image" href={s.heroImage} fetchPriority="high" />
       <section id="home" className="relative flex min-h-screen items-center overflow-hidden">
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/images/aero-hero.jpg)" }}
+          style={{ backgroundImage: `url(${s.heroImage})` }}
         />
         <div
           aria-hidden="true"
@@ -328,7 +344,7 @@ export default async function Home() {
                   <span className="block text-3xl md:text-5xl">{heroGreeting}</span>
                   <span className="chrome-text">{heroName}</span>
                 </h1>
-                <p className="mt-5 text-xl font-bold md:text-3xl"><RoleRotator roles={locale === "en" ? ["Full-Stack Developer", "UI/UX Designer", "Digital Content Creator"] : locale === "es" ? ["Desarrollador Full-Stack", "Diseñador UI/UX", "Creador de Contenido Digital"] : ["Desenvolvedor Full-Stack", "UI/UX Designer", "Criador de Conteúdo Digital"]} /></p>
+                <p className="mt-5 text-xl font-bold md:text-3xl"><RoleRotator roles={(locale === "en" ? s.heroRolesEn : locale === "es" ? s.heroRolesEs : s.heroRolesPt).split("\n").map((role) => role.trim()).filter(Boolean)} /></p>
                 <p className="mt-3 max-w-xl text-lg font-semibold text-[#173b59]">{heroSubtitle}</p>
                 <div className="mt-8 flex flex-wrap gap-4">
                   <a href="#projetos" className="btn-aero">
@@ -339,12 +355,12 @@ export default async function Home() {
                   </a>
                 </div>
                 <div className="mt-6 flex items-center gap-4" aria-label="Redes sociais">
-                  {[["GitHub","https://github.com/CAFE2l","◉"],["LinkedIn","https://www.linkedin.com/in/gabriel-felipe-sabino-de-souza-ab05a630a/","in"],["X","https://x.com/ct_cafe87877","𝕏"],["YouTube","https://www.youtube.com/@CAFE_ct/streams","▶"]].map(([name,url,icon]) => <a key={name} href={url} target="_blank" rel="noreferrer" aria-label={name} className="grid h-10 w-10 place-items-center rounded-full border border-white bg-white/75 text-lg font-black text-[#0b5ed7] shadow">{icon}</a>)}
+                  {[["GitHub",s.socials.github,"◉"],["LinkedIn",s.socials.linkedin,"in"],["X",s.socials.x,"𝕏"],["YouTube",s.socials.youtube,"▶"]].filter(([,url]) => Boolean(url)).map(([name,url,icon]) => <a key={name} href={url} target="_blank" rel="noreferrer" aria-label={name} className="grid h-10 w-10 place-items-center rounded-full border border-white bg-white/75 text-lg font-black text-[#0b5ed7] shadow">{icon}</a>)}
                 </div>
               </div>
             </HeroItem>
             <HeroItem className="flex justify-center">
-              <AeroOrb />
+              <AeroOrb profileImage={s.profileImage} />
             </HeroItem>
           </HeroIntro>
         </div>

@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Home",
-    "sobre": "About",
+    "sobre": "About Me",
     "projetos": "Projects",
     "experiencia": "Experience",
     "habilidades": "Skills",
@@ -11,8 +11,8 @@
     "admin": "Admin"
   },
   "home": {
-    "verProjetos": "View projects",
-    "falarComigo": "Get in touch",
+    "verProjetos": "See Projects",
+    "falarComigo": "Contact Me",
     "sobreTitulo": "About me",
     "projetosTitulo": "Projects",
     "experienciaTitulo": "Experience",
@@ -24,8 +24,8 @@
     "certificadosTextoVazio": "Certificates and education.",
     "verCertificados": "View certificates",
     "verTodosProjetos": "View all projects",
-    "contatoTitulo": "Let's build something together",
-    "contatoTexto": "Reach out for a project, a partnership, or just to talk code.",
+    "contatoTitulo": "Let's Stay Connected",
+    "contatoTexto": "I am always open to discussing new projects, job opportunities or simply exchanging ideas about technology. Contact me and I will get back to you as soon as possible.",
     "outrosProjetos": "Other projects"
   },
   "certificados": {
@@ -53,6 +53,9 @@
     "outrosProjetos": "Other projects"
   },
   "contato": {
+    "locationLabel": "Location",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
     "nome": "Name",
     "nomePlaceholder": "Your name",
     "email": "Email",

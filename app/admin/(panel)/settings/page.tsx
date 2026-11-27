@@ -31,6 +31,8 @@ export default async function SettingsPage({
           <Field label="PDF do currículo" htmlFor="cvUrl" hint="Envie o PDF para exibir no modal da navegação.">
             <UploadInput name="cvUrl" defaultValue={settings.cvUrl} accept="application/pdf" />
           </Field>
+          <Field label="Imagem de fundo do hero" htmlFor="heroImage"><UploadInput name="heroImage" defaultValue={settings.heroImage} accept="image/png,image/jpeg,image/webp" /></Field>
+          <div className="grid gap-5 sm:grid-cols-2"><Field label="Foto do perfil" htmlFor="profileImage"><UploadInput name="profileImage" defaultValue={settings.profileImage} accept="image/png,image/jpeg,image/webp" /></Field><Field label="Foto da seção Sobre" htmlFor="aboutImage"><UploadInput name="aboutImage" defaultValue={settings.aboutImage} accept="image/png,image/jpeg,image/webp" /></Field></div>
           <Field label="Título principal" htmlFor="heroTitle">
             <TextInput id="heroTitle" name="heroTitle" required defaultValue={settings.heroTitle} />
           </Field>
@@ -49,6 +51,9 @@ export default async function SettingsPage({
           <Field label="Subtítulo (ES)" htmlFor="heroSubtitleEs">
             <TextArea id="heroSubtitleEs" name="heroSubtitleEs" rows={2} defaultValue={settings.heroSubtitleEs} />
           </Field>
+          <Field label="Cargos rotativos (PT-BR, um por linha)" htmlFor="heroRolesPt"><TextArea id="heroRolesPt" name="heroRolesPt" rows={3} defaultValue={settings.heroRolesPt} /></Field>
+          <Field label="Rotating roles (EN, one per line)" htmlFor="heroRolesEn"><TextArea id="heroRolesEn" name="heroRolesEn" rows={3} defaultValue={settings.heroRolesEn} /></Field>
+          <Field label="Roles rotativos (ES, uno por línea)" htmlFor="heroRolesEs"><TextArea id="heroRolesEs" name="heroRolesEs" rows={3} defaultValue={settings.heroRolesEs} /></Field>
         </section>
 
         <section className="glass space-y-5 p-6">
@@ -70,6 +75,10 @@ export default async function SettingsPage({
             <TextInput id="email" name="email" type="email" defaultValue={settings.email} />
           </Field>
           <div className="grid gap-5 sm:grid-cols-2">
+            <Field label="Localização" htmlFor="location"><TextInput id="location" name="location" defaultValue={settings.location} /></Field>
+            <Field label="Telefone" htmlFor="phone"><TextInput id="phone" name="phone" defaultValue={settings.phone} /></Field>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
             <Field label="GitHub" htmlFor="social_github">
               <TextInput id="social_github" name="social_github" type="url" defaultValue={settings.socials.github} placeholder="https://github.com/…" />
             </Field>
@@ -87,6 +96,12 @@ export default async function SettingsPage({
             </Field>
             <Field label="WhatsApp" htmlFor="social_whatsapp">
               <TextInput id="social_whatsapp" name="social_whatsapp" type="url" defaultValue={settings.socials.whatsapp} placeholder="https://wa.me/…" />
+            </Field>
+            <Field label="X / Twitter" htmlFor="social_x">
+              <TextInput id="social_x" name="social_x" type="url" defaultValue={settings.socials.x} placeholder="https://x.com/…" />
+            </Field>
+            <Field label="Calendly" htmlFor="social_calendly">
+              <TextInput id="social_calendly" name="social_calendly" type="url" defaultValue={settings.socials.calendly} placeholder="https://calendly.com/…" />
             </Field>
           </div>
         </section>

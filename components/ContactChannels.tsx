@@ -10,10 +10,10 @@ export type ContactChannel = {
 };
 
 export const CONTACT_CHANNELS: readonly ContactChannel[] = [
-  { key: "gmail", label: "Gmail", image: "/contacts/gmail.gif", imageApng: "/contacts/gmail.png" },
+  { key: "github", label: "GitHub", image: "/contacts/github.gif" },
   { key: "linkedin", label: "LinkedIn", image: "/contacts/linkedin.gif" },
   { key: "whatsapp", label: "WhatsApp", image: "/contacts/whatsapp.gif" },
-  { key: "github", label: "GitHub", image: "/contacts/github.gif" },
+  { key: "gmail", label: "Gmail", image: "/contacts/gmail.gif", imageApng: "/contacts/gmail.png" },
 ];
 
 export const CONTACT_CHANNEL_KEYS = new Set<string>(CONTACT_CHANNELS.map((c) => c.key));
@@ -42,7 +42,7 @@ export default function ContactChannels({
       {CONTACT_CHANNELS.map((channel) => {
         const url = resolveUrl(channel, socials, email);
         const className =
-          "group flex flex-col items-center gap-3 rounded-2xl border border-white/15 bg-white/5 p-4 text-center transition hover:border-cyan-300/60 hover:bg-white/10";
+          "group flex flex-col items-center gap-3 rounded-2xl border border-white/80 bg-white/65 p-4 text-center shadow-sm transition hover:-translate-y-1 hover:border-sky-400 hover:bg-white/90";
         const body = (
           <>
             <picture className="flex h-20 w-20 items-center justify-center">
@@ -57,7 +57,7 @@ export default function ContactChannels({
                 className="h-20 w-20 object-contain transition duration-200 group-hover:scale-110"
               />
             </picture>
-            <span className="text-sm font-semibold text-white/85">{channel.label}</span>
+            <span className="text-sm font-semibold text-[#173b59]">{channel.label}</span>
           </>
         );
 

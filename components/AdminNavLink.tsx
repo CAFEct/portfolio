@@ -17,13 +17,11 @@ export default function AdminNavLink() {
 
   if (!isAdmin) return null;
   return (
-    <li>
-      <Link
-        href="/admin"
-        className="block whitespace-nowrap rounded-full border border-cyan-300/50 px-3 py-1.5 text-cyan-200 transition hover:bg-cyan-300/15"
-      >
-        Admin
-      </Link>
-    </li>
+    <Link
+      href="/admin"
+      className="block whitespace-nowrap rounded-full border border-sky-500/40 px-3 py-1.5 text-sm font-semibold text-[#0750c2] transition hover:bg-sky-100"
+    >
+      Admin
+    </Link>
   );
 }

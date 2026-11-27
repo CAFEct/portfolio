@@ -9,11 +9,11 @@ const bubbles = [
   { size: "1.75rem", top: "85%", left: "45%", delay: "2.6s" },
 ];
 
-export default function AeroOrb() {
+export default function AeroOrb({ profileImage = "/images/pfp.jpg" }: { profileImage?: string }) {
   return (
     <div className="relative mx-auto w-fit px-4 py-8" aria-label="Foto de Gabriel Felipe">
       <div className="orb">
-        <Image src="/images/pfp.jpg" alt="Gabriel Felipe" fill sizes="(max-width: 768px) 75vw, 400px" onError={(event) => { event.currentTarget.style.display = "none"; }} />
+        <Image src={profileImage} alt="Gabriel Felipe" fill sizes="(max-width: 768px) 75vw, 400px" onError={(event) => { event.currentTarget.style.display = "none"; }} />
         <span className="absolute inset-0 grid place-items-center font-display text-6xl font-extrabold text-[#0b5ed7]/50">GF</span>
       </div>
       <div className="glass absolute left-0 top-6 rounded-full px-4 py-3 text-sm font-bold">🎉 1+ ano de Experiência</div>
