@@ -51,7 +51,7 @@ async function main() {
     { title: "LinkWave", slug: "linkwave", description: "Links para criadores, influenciadores e streamers. Uma forma simples e elegante de compartilhar todo o seu conteúdo em um só lugar.", descriptionEn: "Links for creators, influencers and streamers. A simple and elegant way to share all your content in one place.", imageUrl: "/images/linkwave.jpg", liveUrl: "https://linkwave.ct.ws", repoUrl: "https://github.com/CAFE2l/LinkWave", stack: ["PHP", "Tailwind", "MySQL", "Firebase", "JavaScript", "FileZilla"], isFeatured: true, sortOrder: 4 },
     { title: "SampTech", slug: "samptech", description: "Loja de Informática e Assistência Técnica para Computadores, Celulares e Consoles.", descriptionEn: "Computer store and technical support for computers, phones and consoles.", imageUrl: "/images/samptech.jpg", liveUrl: "https://samptech-link-tree.vercel.app/", repoUrl: "https://github.com/CAFE2l/samptechPHP", stack: ["Firebase", "JavaScript", "MySQL", "PHP", "Tailwind", "FileZilla"], isFeatured: true, sortOrder: 5 },
     { title: "Stream Pix", slug: "stream-pix", description: "Plataforma de alertas de doações via Pix para streaming.", descriptionEn: "Pix donation alerts platform for streaming.", imageUrl: "/images/streampix.png", liveUrl: "https://stream-pix-ashy.vercel.app/", repoUrl: "https://github.com/CAFE2l/Stream_Pix", stack: ["React", "Render", "Cloudinary", "Firebase", "Node.js", "TypeScript"], isFeatured: true, sortOrder: 6 },
-  ]).onConflictDoUpdate({ target: projects.slug, set: { title: drizzleSql`excluded.title`, description: drizzleSql`excluded.description`, descriptionEn: drizzleSql`excluded.description_en`, imageUrl: drizzleSql`excluded.image_url`, liveUrl: drizzleSql`excluded.live_url`, repoUrl: drizzleSql`excluded.repo_url`, stack: drizzleSql`excluded.stack`, isFeatured: drizzleSql`excluded.is_featured`, isVisible: drizzleSql`excluded.is_visible`, sortOrder: drizzleSql`excluded.sort_order` } });
+  ]).onConflictDoUpdate({ target: projects.slug, set: { title: drizzleSql`excluded.title_pt`, description: drizzleSql`excluded.description_pt`, descriptionEn: drizzleSql`excluded.description_en`, imageUrl: drizzleSql`excluded.image_url`, liveUrl: drizzleSql`excluded.live_url`, repoUrl: drizzleSql`excluded.repo_url`, stack: drizzleSql`excluded.stack`, isFeatured: drizzleSql`excluded.is_featured`, isVisible: drizzleSql`excluded.is_published`, sortOrder: drizzleSql`excluded.sort_order` } });
 
   const [{ total: experienceCount }] = await db.select({ total: count() }).from(experiences);
   if (experienceCount === 0) await db.insert(experiences).values([
@@ -69,8 +69,8 @@ async function main() {
     },
     {
       role: "Influenciador Digital", roleEn: "Digital Influencer", company: "Estratégia de redes sociais", period: "Março de 2025 — Presente",
-      description: "YouTube: Shorts com edições de alto engajamento; vídeos longos com produção premium; lives para interação com a comunidade. Twitter/X: registro da jornada de desenvolvimento e conversas com a comunidade tech. Pinterest: portfólio de design. LinkedIn: certificados e conquistas profissionais. Telegram: comunicação com clientes. Discord: comunidade de estudos e foco.",
-      descriptionEn: "YouTube: high-engagement Shorts, premium long-form videos, and community lives. Twitter/X: documenting my developer journey and connecting with the tech community. Pinterest: design portfolio. LinkedIn: professional certificates and achievements. Telegram: client communication. Discord: study community and focused work streams.",
+      description: "YouTube: Shorts → edições de alto engajamento | vídeos longos → produção premium | lives → interação com a comunidade. Propósito: crescimento da audiência e conexão.\nTwitter/X: registro da jornada de desenvolvimento e ideias sobre finanças | interação em tempo real com a comunidade tech.\nPinterest: portfólio de design. Propósito: tráfego orgânico e visibilidade.\nLinkedIn: certificados e conquistas profissionais. Propósito: autoridade e credibilidade.\nTelegram: comunicação direta com clientes e conteúdo promocional. Propósito: canal de monetização.\nDiscord: comunidade de estudos e espaço de aprendizado | sessões de estudo ao vivo com foco. Propósito: participação e retenção da comunidade.",
+      descriptionEn: "YouTube: Shorts → high-engagement edits | Long-form → premium production | Lives → community interaction. Purpose: audience growth + strong connection.\nTwitter/X: Document my dev journey + financial insights | Real-time engagement with the tech community.\nPinterest: Design portfolio. Purpose: passive traffic + design visibility.\nLinkedIn: Professional certificates & achievements. Purpose: establish authority + professional credibility.\nTelegram: Direct client communication + promotional content. Purpose: direct monetization channel.\nDiscord: Study community & learning hub | Study streams (camera on, focused work). Purpose: community retention + strong engagement.",
       sortOrder: 3,
     },
   ]);
@@ -106,11 +106,19 @@ async function main() {
     { key: "heroSubtitle", value: DEFAULT_SETTINGS.heroSubtitle },
     { key: "heroSubtitleEn", value: DEFAULT_SETTINGS.heroSubtitleEn },
     { key: "heroSubtitleEs", value: DEFAULT_SETTINGS.heroSubtitleEs },
+    { key: "heroRolesPt", value: DEFAULT_SETTINGS.heroRolesPt },
+    { key: "heroRolesEn", value: DEFAULT_SETTINGS.heroRolesEn },
+    { key: "heroRolesEs", value: DEFAULT_SETTINGS.heroRolesEs },
     { key: "aboutText", value: DEFAULT_SETTINGS.aboutText },
     { key: "aboutTextEn", value: DEFAULT_SETTINGS.aboutTextEn },
     { key: "aboutTextEs", value: DEFAULT_SETTINGS.aboutTextEs },
     { key: "email", value: DEFAULT_SETTINGS.email },
+    { key: "location", value: DEFAULT_SETTINGS.location },
+    { key: "phone", value: DEFAULT_SETTINGS.phone },
     { key: "cvUrl", value: DEFAULT_SETTINGS.cvUrl },
+    { key: "heroImage", value: DEFAULT_SETTINGS.heroImage },
+    { key: "profileImage", value: DEFAULT_SETTINGS.profileImage },
+    { key: "aboutImage", value: DEFAULT_SETTINGS.aboutImage },
     { key: "socials", value: DEFAULT_SETTINGS.socials },
     { key: "seo", value: DEFAULT_SETTINGS.seo },
     { key: "sections", value: DEFAULT_SETTINGS.sections },

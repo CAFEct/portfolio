@@ -35,7 +35,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const session = await requireAdmin();
 
   return (
-    <div className="flex min-h-screen">
+    <div className="admin-shell flex min-h-screen">
       <aside className="glass sticky top-0 flex h-screen w-56 shrink-0 flex-col gap-1 overflow-y-auto rounded-none border-y-0 border-l-0 p-4">
         <Link href="/admin" className="chrome-text mb-4 px-2 font-display text-xl font-extrabold">
           CAFÉ Admin

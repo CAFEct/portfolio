@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <defs>
+    <linearGradient id="cup" x1="15" y1="24" x2="57" y2="62" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset=".5" stop-color="#c9f4ff"/><stop offset="1" stop-color="#55bdf1"/></linearGradient>
+    <linearGradient id="handle" x1="53" y1="32" x2="73" y2="52" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#73d7f5"/></linearGradient>
+    <linearGradient id="coffee" x1="27" y1="23" x2="47" y2="31" gradientUnits="userSpaceOnUse"><stop stop-color="#6d3b2a"/><stop offset="1" stop-color="#241713"/></linearGradient>
+  </defs>
+  <path d="M56 31h7a10 10 0 0 1 0 20h-9" stroke="url(#handle)" stroke-width="7"/>
+  <path d="M16 26h42l-4 32a11 11 0 0 1-11 10H31a11 11 0 0 1-11-10l-4-32Z" fill="url(#cup)" stroke="#fff" stroke-width="2.5"/>
+  <ellipse cx="37" cy="27" rx="21" ry="6.5" fill="#fff"/>
+  <ellipse cx="37" cy="28" rx="17" ry="4" fill="url(#coffee)"/>
+  <path d="M29 16c-4-5 4-7 1-12M43 16c-4-5 4-7 1-12" stroke="#fff" stroke-linecap="round" stroke-width="2.5" opacity=".8"/>
+  <path d="M23 38c4 3 4 12 3 16" stroke="#fff" stroke-linecap="round" stroke-width="2" opacity=".7"/>
+</svg>

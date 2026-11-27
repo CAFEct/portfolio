@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Exo_2, Nunito_Sans } from "next/font/google";
 import { Suspense } from "react";
+import { getLocale } from "next-intl/server";
 import Navbar from "@/components/Navbar";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
-import { DEFAULT_SETTINGS } from "@/lib/settings";
+import { getSettings, DEFAULT_SETTINGS } from "@/lib/settings";
+import { pickLocalized } from "@/lib/i18n";
 import "./globals.css";
 
 const exo = Exo_2({
@@ -18,9 +20,16 @@ const nunito = Nunito_Sans({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  let settings = DEFAULT_SETTINGS;
+  try {
+    settings = await getSettings();
+  } catch {
+    // Fall back to the portfolio defaults when the database isn't available.
+  }
   return {
-    title: DEFAULT_SETTINGS.seo.title,
-    description: DEFAULT_SETTINGS.seo.description,
+    title: pickLocalized(settings.seo.title, settings.seo.titleEn, locale) || DEFAULT_SETTINGS.seo.title,
+    description: pickLocalized(settings.seo.description, settings.seo.descriptionEn, locale) || DEFAULT_SETTINGS.seo.description,
   };
 }
 
