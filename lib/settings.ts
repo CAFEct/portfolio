@@ -24,23 +24,30 @@ export type SiteSettings = {
   aboutText: string;
   aboutTextEn: string;
   email: string;
-  socials: { github: string; youtube: string; linkedin: string; instagram: string };
+  socials: {
+    github: string;
+    youtube: string;
+    linkedin: string;
+    instagram: string;
+    gmail: string;
+    discord: string;
+    whatsapp: string;
+  };
   seo: { title: string; titleEn: string; description: string; descriptionEn: string };
   sections: SectionSetting[];
 };
 
 export const DEFAULT_SETTINGS: SiteSettings = {
-  heroTitle: "Gabriel, o dev por trás do CAFÉ",
-  heroTitleEn: "",
-  heroSubtitle:
-    "Crio sites, apps e interfaces com cara de futuro e brilho de vidro. Este portfólio é o meu laboratório.",
-  heroSubtitleEn: "",
+  heroTitle: "Olá a todos 👋, sou Gabriel Felipe",
+  heroTitleEn: "Hi all 👋, I'm Gabriel Felipe",
+  heroSubtitle: "Desenvolvedor Full-Stack Júnior",
+  heroSubtitleEn: "Junior Full-Stack Developer",
   aboutText:
-    "Sou desenvolvedor full-stack e criador de conteúdo em Curitiba. Trabalho com web, UI/UX e vídeo, e também atendo clientes com portfólios e projetos freelance.",
-  aboutTextEn: "",
-  email: "",
-  socials: { github: "", youtube: "", linkedin: "", instagram: "" },
-  seo: { title: "Gabriel | CAFÉ", titleEn: "", description: "Portfólio de Gabriel: desenvolvedor full-stack, UI/UX e criador de conteúdo.", descriptionEn: "" },
+    "Sou desenvolvedor full-stack com mais de 1 ano de experiência criando soluções web inovadoras. Minha paixão é transformar ideias complexas em interfaces intuitivas e funcionais, com ótimas experiências para as pessoas.\n\nMinha jornada na programação começou aos 15 anos. Desde então, tenho me dedicado a aprender novas tecnologias e metodologias. Acredito que a tecnologia deve ser acessível e útil para todos.",
+  aboutTextEn: "I am a full-stack developer with over 1 year of experience creating innovative web solutions. My passion is transforming complex ideas into intuitive and functional interfaces that provide excellent user experiences.\n\nMy programming journey began at 15 years of age, and since then I have been dedicated to learning new technologies and methodologies. I believe technology should be accessible and useful to everyone, and that's what motivates me to create applications that make a difference.",
+  email: "gutiajs@gmail.com",
+  socials: { github: "https://github.com/CAFE2l", youtube: "https://www.youtube.com/@CAFE_ct/streams", linkedin: "https://www.linkedin.com/in/gabriel-felipe-sabino-de-souza-ab05a630a/", instagram: "", gmail: "mailto:gutiajs@gmail.com", discord: "", whatsapp: "https://api.whatsapp.com/send/?phone=5541996713782" },
+  seo: { title: "Gabriel Felipe | Desenvolvedor Full-Stack", titleEn: "Gabriel Felipe | Full-Stack Developer", description: "Portfólio de Gabriel Felipe, desenvolvedor full-stack júnior.", descriptionEn: "Portfolio of Gabriel Felipe, junior full-stack developer." },
   sections: SECTION_DEFS.map((s, i) => ({ id: s.id, visible: true, order: i })),
 };
 

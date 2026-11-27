@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CAFÉ — Portfólio + Admin CMS
 
-## Getting Started
+Portfólio pessoal (pt-BR / EN) com painel administrativo privado. Todo o conteúdo público — projetos, certificados, experiência, habilidades, vídeos, textos, redes sociais, ordem das seções, traduções e mensagens de contato — é gerenciado pelo admin em `/admin`, sem mexer em código.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router, Turbopack, Cache Components) + React 19 + TypeScript
+- **Tailwind CSS v4** com visual "Frutiger Aero" (glass, chrome text, orb)
+- **Drizzle ORM** + **Neon Postgres** (`@neondatabase/serverless`)
+- **Auth.js v5** com login GitHub (apenas `ADMIN_EMAIL`)
+- **next-intl** (pt-BR padrão, en) via cookie `locale`
+- **Zod** para validação server-side
+- **Vercel Blob** (opcional) para uploads de imagens/PDF
+- **Resend** (opcional) para notificar mensagens de contato por e-mail
+
+## Setup local
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # preencha as variáveis
+npm run db:push              # cria as tabelas no Neon
+npm run db:seed              # popula conteúdo inicial
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Variáveis de ambiente (`.env.local`)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variável | Obrigatória | Descrição |
+|---|---|---|
+| `DATABASE_URL` | sim | Connection string do Neon (use a pooled). |
+| `AUTH_SECRET` | sim | `openssl rand -base64 32` |
+| `ADMIN_EMAIL` | sim | Único e-mail GitHub autorizado no `/admin`. |
+| `AUTH_GITHUB_ID` / `AUTH_GITHUB_SECRET` | sim | OAuth App do GitHub (veja abaixo). |
+| `BLOB_READ_WRITE_TOKEN` | não | Uploads de imagem/PDF no admin (`@vercel/blob`). |
+| `RESEND_API_KEY` + `CONTACT_EMAIL` | não | Notificação por e-mail do formulário de contato. |
+| `NEXT_PUBLIC_SITE_URL` | não | URL pública para sitemap/robots/OG (default: `http://localhost:3000`). |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### GitHub OAuth (login do admin)
 
-## Learn More
+1. Em *GitHub → Settings → Developer settings → OAuth Apps*, crie um app.
+2. **Callback URLs**:
+   - Local: `http://localhost:3000/api/auth/callback/github`
+   - Produção: `https://seu-dominio.vercel.app/api/auth/callback/github`
+3. Copie Client ID/Secret para `AUTH_GITHUB_ID`/`AUTH_GITHUB_SECRET`.
+4. Apenas a conta cujo e-mail do perfil GitHub seja igual a `ADMIN_EMAIL` consegue entrar — os demais são rejeitados no `signIn` callback e em `requireAdmin()`.
 
-To learn more about Next.js, take a look at the following resources:
+### Vercel Blob (uploads)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. `npm i @vercel/blob` (já instalado).
+2. No projeto Vercel: *Storage → Create Database → Blob*, copie `BLOB_READ_WRITE_TOKEN`.
+3. O admin valida tipo (png/jpg/webp/pdf) e tamanho (5 MB imagens, 10 MB PDFs) no servidor. Sem o token, os formulários continuam aceitando links colados.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Neon
 
-## Deploy on Vercel
+Crie o banco em [neon.tech](https://neon.tech), copie a connection string pooled para `DATABASE_URL` e rode `npm run db:push` + `npm run db:seed`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run dev        # dev server
+npm run build      # build de produção
+npm run lint       # eslint
+npm run db:push    # drizzle-kit push (sincroniza schema)
+npm run db:seed    # seed inicial (só insere se vazio)
+npm run db:studio  # drizzle studio
+```
+
+## Deploy na Vercel
+
+1. Importe o repositório na Vercel.
+2. Adicione todas as env vars do `.env.local` no projeto (Production + Preview).
+3. Rode `npm run db:push` e `npm run db:seed` uma vez localmente apontando para o `DATABASE_URL` de produção (ou via CI).
+4. Deploy. Verifique que `/admin` redireciona para o login e que contas GitHub ≠ `ADMIN_EMAIL` são bloqueadas.
+
+## Estrutura
+
+```
+app/
+  admin/(panel)/   # painel: dashboard, CRUDs, mensagens, settings, backup
+  admin/login/     # login GitHub (fora do grupo protegido)
+  api/             # auth (next-auth), track (analytics), admin/export
+  certificados/    # listagem pública com busca/filtro/paginação
+  projetos/        # listagem + detalhe por slug
+components/        # UI: Navbar, AeroOrb, GlassCard, VideoEmbed, forms admin
+db/                # schema Drizzle + client Neon
+lib/               # admin guard, queries, settings, validação, i18n, rate limit
+messages/          # dicionários next-intl (pt-BR, en)
+scripts/seed.ts    # seed do banco
+```
+
+## Analytics
+
+Eventos (`page_view`, `project_click`, `pdf_download`) são enviados via `navigator.sendBeacon` para `/api/track` — sem cookies e sem armazenar IPs. O dashboard admin mostra totais, gráfico dos últimos 30 dias e tops.

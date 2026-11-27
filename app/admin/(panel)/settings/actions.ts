@@ -1,6 +1,5 @@
 "use server";
 
-import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { db } from "@/db";
@@ -36,6 +35,9 @@ export async function updateSettings(formData: FormData) {
       youtube: str(formData, "social_youtube") || undefined,
       linkedin: str(formData, "social_linkedin") || undefined,
       instagram: str(formData, "social_instagram") || undefined,
+      gmail: str(formData, "social_gmail") || undefined,
+      discord: str(formData, "social_discord") || undefined,
+      whatsapp: str(formData, "social_whatsapp") || undefined,
     },
     seo: {
       title: str(formData, "seo_title"),

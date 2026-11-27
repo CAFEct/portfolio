@@ -6,9 +6,11 @@ import { Play } from "lucide-react";
 export default function VideoEmbed({
   youtubeId,
   title,
+  playLabel,
 }: {
   youtubeId: string;
   title: string;
+  playLabel: string;
 }) {
   const [playing, setPlaying] = useState(false);
 
@@ -31,9 +33,9 @@ export default function VideoEmbed({
       type="button"
       onClick={() => setPlaying(true)}
       className="group relative block aspect-video w-full overflow-hidden rounded-2xl"
-      aria-label={`Reproduzir vídeo: ${title}`}
+      aria-label={playLabel}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- YouTube thumbnail, no next/image domain needed */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- YouTube thumbnail */}
       <img
         src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
         alt=""

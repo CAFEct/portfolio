@@ -13,6 +13,7 @@ const NAV = [
   { href: "/admin/videos", label: "Vídeos" },
   { href: "/admin/messages", label: "Mensagens" },
   { href: "/admin/settings", label: "Configurações" },
+  { href: "/admin/backup", label: "Backup" },
 ];
 
 async function logout() {

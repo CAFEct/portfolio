@@ -33,6 +33,7 @@ async function notifyByEmail(name: string, email: string, message: string) {
 }
 
 export async function sendMessage(_prev: ContactState, formData: FormData): Promise<ContactState> {
+  const en = formData.get("locale") === "en";
   const parsed = contactSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
@@ -41,7 +42,12 @@ export async function sendMessage(_prev: ContactState, formData: FormData): Prom
   });
 
   if (!parsed.success) {
-    return { ok: false, error: "Preencha nome, e-mail válido e uma mensagem (mín. 10 caracteres)." };
+    return {
+      ok: false,
+      error: en
+        ? "Please fill in your name, a valid email and a message (min. 10 characters)."
+        : "Preencha nome, e-mail válido e uma mensagem (mín. 10 caracteres).",
+    };
   }
 
   // Honeypot filled → silently accept, store nothing.
@@ -50,7 +56,12 @@ export async function sendMessage(_prev: ContactState, formData: FormData): Prom
   const h = await headers();
   const ip = h.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   if (!rateLimit(`contact:${ip}`)) {
-    return { ok: false, error: "Muitas mensagens enviadas. Tente novamente em alguns minutos." };
+    return {
+      ok: false,
+      error: en
+        ? "Too many messages sent. Please try again in a few minutes."
+        : "Muitas mensagens enviadas. Tente novamente em alguns minutos.",
+    };
   }
 
   await db.insert(messages).values({

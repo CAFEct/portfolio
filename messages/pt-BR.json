@@ -48,7 +48,8 @@
     "voltar": "← Projetos",
     "verProjeto": "Ver projeto",
     "repositorio": "Repositório",
-    "vazio": "Nenhum projeto publicado ainda."
+    "vazio": "Nenhum projeto publicado ainda.",
+    "outrosProjetos": "Outros projetos"
   },
   "contato": {
     "nome": "Nome",

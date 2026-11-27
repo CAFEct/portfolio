@@ -1,18 +1,20 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { LOCALE_COOKIE, LOCALES } from "@/lib/locales";
+import { setLocale } from "@/app/actions/locale";
+import { LOCALES } from "@/lib/locales";
 
-const LABELS: Record<string, string> = { "pt-BR": "PT", en: "EN" };
+const LABELS: Record<string, { code: string; flag: string }> = {
+  "pt-BR": { code: "PT", flag: "🇧🇷" }, en: { code: "EN", flag: "🇺🇸" }, es: { code: "ES", flag: "🇪🇸" },
+};
 
 export default function LanguageSwitcher({ locale }: { locale: string }) {
-  const router = useRouter();
   const [pending, startTransition] = useTransition();
 
   function switchTo(next: string) {
-    document.cookie = `${LOCALE_COOKIE}=${next};path=/;max-age=31536000;samesite=lax`;
-    startTransition(() => router.refresh());
+    startTransition(async () => {
+      await setLocale(next, window.location.pathname + window.location.search);
+    });
   }
 
   return (
@@ -28,7 +30,7 @@ export default function LanguageSwitcher({ locale }: { locale: string }) {
             locale === l ? "bg-cyan-300 text-black" : "text-white/70 hover:text-white"
           }`}
         >
-          {LABELS[l]}
+          <span aria-hidden="true">{LABELS[l].flag}</span> {LABELS[l].code}
         </button>
       ))}
     </div>

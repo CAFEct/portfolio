@@ -69,6 +69,15 @@ export default async function SettingsPage({
             <Field label="Instagram" htmlFor="social_instagram">
               <TextInput id="social_instagram" name="social_instagram" type="url" defaultValue={settings.socials.instagram} placeholder="https://instagram.com/…" />
             </Field>
+            <Field label="Gmail" htmlFor="social_gmail">
+              <TextInput id="social_gmail" name="social_gmail" type="url" defaultValue={settings.socials.gmail} placeholder="https://mail.google.com/…" />
+            </Field>
+            <Field label="Discord" htmlFor="social_discord">
+              <TextInput id="social_discord" name="social_discord" type="url" defaultValue={settings.socials.discord} placeholder="https://discord.gg/…" />
+            </Field>
+            <Field label="WhatsApp" htmlFor="social_whatsapp">
+              <TextInput id="social_whatsapp" name="social_whatsapp" type="url" defaultValue={settings.socials.whatsapp} placeholder="https://wa.me/…" />
+            </Field>
           </div>
         </section>
 

@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bfe8ff"/>
+      <stop offset="0.45" stop-color="#7cc8ff"/>
+      <stop offset="0.72" stop-color="#3fa4ff"/>
+      <stop offset="1" stop-color="#0b63ff"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="0.25" stop-color="#eaf7ff" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#bfe8ff" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#bfe8ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sunCore" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.7" stop-color="#f4fbff"/>
+      <stop offset="1" stop-color="#d8f0ff"/>
+    </radialGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f8fe0"/>
+      <stop offset="0.35" stop-color="#1565c0"/>
+      <stop offset="1" stop-color="#062a66"/>
+    </linearGradient>
+    <linearGradient id="grass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7ed957"/>
+      <stop offset="0.6" stop-color="#3fae2a"/>
+      <stop offset="1" stop-color="#1e7a12"/>
+    </linearGradient>
+    <linearGradient id="grassFront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#57c93f"/>
+      <stop offset="1" stop-color="#2c8f1d"/>
+    </linearGradient>
+    <linearGradient id="flare" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="bubble" cx="0.35" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.75"/>
+      <stop offset="0.6" stop-color="#cfeaff" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#8fd0ff" stop-opacity="0.05"/>
+    </radialGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="soft2" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <filter id="rays" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+  </defs>
+
+  <!-- sky -->
+  <rect width="1600" height="900" fill="url(#sky)"/>
+
+  <!-- sun glow + core -->
+  <circle cx="1150" cy="170" r="330" fill="url(#sunGlow)"/>
+  <circle cx="1150" cy="170" r="72" fill="url(#sunCore)"/>
+
+  <!-- lens flare streaks -->
+  <g filter="url(#rays)" opacity="0.55">
+    <rect x="180" y="163" width="1940" height="14" fill="url(#flare)" transform="rotate(-14 1150 170)"/>
+    <rect x="180" y="163" width="1940" height="7" fill="url(#flare)" transform="rotate(9 1150 170)"/>
+    <rect x="600" y="60" width="1100" height="4" fill="url(#flare)" opacity="0.5"/>
+  </g>
+
+  <!-- clouds -->
+  <g fill="#ffffff" opacity="0.85" filter="url(#soft)">
+    <ellipse cx="330" cy="150" rx="150" ry="34"/>
+    <ellipse cx="430" cy="120" rx="110" ry="28"/>
+    <ellipse cx="700" cy="90" rx="180" ry="30"/>
+    <ellipse cx="1380" cy="320" rx="140" ry="26"/>
+    <ellipse cx="1470" cy="290" rx="100" ry="22"/>
+  </g>
+  <g fill="#ffffff" opacity="0.5" filter="url(#soft2)">
+    <ellipse cx="520" cy="230" rx="90" ry="16"/>
+    <ellipse cx="950" cy="60" rx="120" ry="18"/>
+    <ellipse cx="1200" cy="380" rx="80" ry="14"/>
+  </g>
+
+  <!-- distant treeline -->
+  <path d="M0 470 Q120 430 260 455 T520 448 T800 462 T1080 445 T1360 460 T1600 450 V520 H0 Z" fill="#2e8b57" opacity="0.55" filter="url(#soft2)"/>
+  <path d="M0 490 Q200 460 420 480 T860 475 T1300 482 T1600 472 V540 H0 Z" fill="#237a4b" opacity="0.7"/>
+
+  <!-- water -->
+  <rect x="0" y="520" width="1600" height="380" fill="url(#water)"/>
+
+  <!-- sun reflection on water -->
+  <g opacity="0.5" filter="url(#soft2)">
+    <rect x="1060" y="540" width="180" height="340" fill="url(#flare)" transform="rotate(90 1150 710)" opacity="0.35"/>
+    <rect x="1090" y="560" width="120" height="8" fill="#eaf7ff" opacity="0.5"/>
+    <rect x="1070" y="600" width="160" height="6" fill="#eaf7ff" opacity="0.4"/>
+    <rect x="1100" y="650" width="110" height="6" fill="#eaf7ff" opacity="0.35"/>
+    <rect x="1080" y="710" width="150" height="5" fill="#eaf7ff" opacity="0.3"/>
+    <rect x="1110" y="780" width="90" height="5" fill="#eaf7ff" opacity="0.25"/>
+  </g>
+
+  <!-- water ripples -->
+  <g stroke="#bfe8ff" stroke-width="2" opacity="0.28" fill="none">
+    <path d="M80 600 q60 -8 120 0 t120 0 t120 0 t120 0 t120 0 t120 0 t120 0 t120 0 t120 0 t120 0"/>
+    <path d="M40 660 q70 -10 140 0 t140 0 t140 0 t140 0 t140 0 t140 0 t140 0 t140 0 t140 0 t140 0"/>
+    <path d="M120 740 q80 -8 160 0 t160 0 t160 0 t160 0 t160 0 t160 0 t160 0 t160 0"/>
+    <path d="M200 830 q90 -8 180 0 t180 0 t180 0 t180 0 t180 0 t180 0"/>
+  </g>
+
+  <!-- grass bank foreground left -->
+  <path d="M0 900 L0 700 Q80 640 200 660 Q330 680 420 640 Q520 600 640 640 Q760 680 860 660 Q960 645 1050 690 L1600 640 L1600 900 Z" fill="url(#grass)"/>
+  <path d="M0 900 L0 780 Q160 720 340 750 Q560 780 760 745 Q980 715 1200 760 Q1400 790 1600 755 L1600 900 Z" fill="url(#grassFront)"/>
+
+  <!-- grass blade highlights -->
+  <g stroke="#a4e86b" stroke-width="3" opacity="0.5" fill="none">
+    <path d="M60 780 q10 -30 4 -55"/>
+    <path d="M120 770 q-6 -28 -16 -48"/>
+    <path d="M220 760 q12 -26 6 -50"/>
+    <path d="M420 700 q10 -24 2 -44"/>
+    <path d="M640 690 q-8 -22 -18 -40"/>
+    <path d="M900 720 q10 -24 4 -46"/>
+  </g>
+
+  <!-- bubbles -->
+  <g>
+    <circle cx="240" cy="300" r="46" fill="url(#bubble)" stroke="#ffffff" stroke-opacity="0.5"/>
+    <circle cx="240" cy="300" r="46" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.5"/>
+    <circle cx="330" cy="420" r="22" fill="url(#bubble)" stroke="#ffffff" stroke-opacity="0.4"/>
+    <circle cx="500" cy="240" r="34" fill="url(#bubble)" stroke="#ffffff" stroke-opacity="0.45"/>
+    <circle cx="640" cy="520" r="18" fill="url(#bubble)" stroke="#ffffff" stroke-opacity="0.35"/>
+    <circle cx="150" cy="560" r="26" fill="url(#bubble)" stroke="#ffffff" stroke-opacity="0.4"/>
+    <circle cx="1330" cy="560" r="40" fill="url(#bubble)" stroke="#ffffff" stroke-opacity="0.35"/>
+    <circle cx="1420" cy="430" r="20" fill="url(#bubble)" stroke="#ffffff" stroke-opacity="0.4"/>
+  </g>
+
+  <!-- vignette for text contrast at edges -->
+  <rect width="1600" height="900" fill="url(#sky)" opacity="0"/>
+  <radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+    <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+    <stop offset="1" stop-color="#02152e" stop-opacity="0.35"/>
+  </radialGradient>
+  <rect width="1600" height="900" fill="url(#vig)"/>
+</svg>

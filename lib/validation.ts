@@ -95,6 +95,9 @@ export const settingsSchema = z.object({
     youtube: optionalUrl,
     linkedin: optionalUrl,
     instagram: optionalUrl,
+    gmail: optionalUrl,
+    discord: optionalUrl,
+    whatsapp: optionalUrl,
   }),
   seo: z.object({
     title: requiredText(200),

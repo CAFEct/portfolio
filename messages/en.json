@@ -48,7 +48,8 @@
     "voltar": "← Projects",
     "verProjeto": "View project",
     "repositorio": "Repository",
-    "vazio": "No projects published yet."
+    "vazio": "No projects published yet.",
+    "outrosProjetos": "Other projects"
   },
   "contato": {
     "nome": "Name",
