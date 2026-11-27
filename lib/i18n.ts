@@ -11,7 +11,9 @@ export function pickLocalized(
   pt: string | null | undefined,
   en: string | null | undefined,
   locale: string,
+  es?: string | null,
 ): string {
   if (locale === "en" && en && en.trim()) return en;
+  if (locale === "es" && es && es.trim()) return es;
   return pt ?? "";
 }

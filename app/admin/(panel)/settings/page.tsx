@@ -3,6 +3,7 @@ import { DEFAULT_SETTINGS, SECTION_DEFS } from "@/lib/settings";
 import { Field, TextArea, TextInput } from "@/components/admin/fields";
 import { SubmitButton } from "@/components/admin/submit-button";
 import { updateSettings } from "./actions";
+import UploadInput from "@/components/admin/upload-input";
 
 export default async function SettingsPage({
   searchParams,
@@ -27,17 +28,26 @@ export default async function SettingsPage({
       <form action={updateSettings} className="mt-8 space-y-8">
         <section className="glass space-y-5 p-6">
           <h2 className="font-display text-xl font-bold text-cyan-200">Hero</h2>
+          <Field label="PDF do currículo" htmlFor="cvUrl" hint="Envie o PDF para exibir no modal da navegação.">
+            <UploadInput name="cvUrl" defaultValue={settings.cvUrl} accept="application/pdf" />
+          </Field>
           <Field label="Título principal" htmlFor="heroTitle">
             <TextInput id="heroTitle" name="heroTitle" required defaultValue={settings.heroTitle} />
           </Field>
           <Field label="Título principal (EN)" htmlFor="heroTitleEn">
             <TextInput id="heroTitleEn" name="heroTitleEn" defaultValue={settings.heroTitleEn} />
           </Field>
+          <Field label="Título principal (ES)" htmlFor="heroTitleEs">
+            <TextInput id="heroTitleEs" name="heroTitleEs" defaultValue={settings.heroTitleEs} />
+          </Field>
           <Field label="Subtítulo" htmlFor="heroSubtitle">
             <TextArea id="heroSubtitle" name="heroSubtitle" rows={2} defaultValue={settings.heroSubtitle} />
           </Field>
           <Field label="Subtítulo (EN)" htmlFor="heroSubtitleEn">
             <TextArea id="heroSubtitleEn" name="heroSubtitleEn" rows={2} defaultValue={settings.heroSubtitleEn} />
+          </Field>
+          <Field label="Subtítulo (ES)" htmlFor="heroSubtitleEs">
+            <TextArea id="heroSubtitleEs" name="heroSubtitleEs" rows={2} defaultValue={settings.heroSubtitleEs} />
           </Field>
         </section>
 
@@ -48,6 +58,9 @@ export default async function SettingsPage({
           </Field>
           <Field label="Texto da seção Sobre (EN)" htmlFor="aboutTextEn">
             <TextArea id="aboutTextEn" name="aboutTextEn" rows={5} defaultValue={settings.aboutTextEn} />
+          </Field>
+          <Field label="Texto da seção Sobre (ES)" htmlFor="aboutTextEs">
+            <TextArea id="aboutTextEs" name="aboutTextEs" rows={5} defaultValue={settings.aboutTextEs} />
           </Field>
         </section>
 
@@ -70,10 +83,7 @@ export default async function SettingsPage({
               <TextInput id="social_instagram" name="social_instagram" type="url" defaultValue={settings.socials.instagram} placeholder="https://instagram.com/…" />
             </Field>
             <Field label="Gmail" htmlFor="social_gmail">
-              <TextInput id="social_gmail" name="social_gmail" type="url" defaultValue={settings.socials.gmail} placeholder="https://mail.google.com/…" />
-            </Field>
-            <Field label="Discord" htmlFor="social_discord">
-              <TextInput id="social_discord" name="social_discord" type="url" defaultValue={settings.socials.discord} placeholder="https://discord.gg/…" />
+              <TextInput id="social_gmail" name="social_gmail" defaultValue={settings.socials.gmail} placeholder="mailto:voce@gmail.com ou https://…" />
             </Field>
             <Field label="WhatsApp" htmlFor="social_whatsapp">
               <TextInput id="social_whatsapp" name="social_whatsapp" type="url" defaultValue={settings.socials.whatsapp} placeholder="https://wa.me/…" />

@@ -17,22 +17,11 @@ export default function LanguageSwitcher({ locale }: { locale: string }) {
     });
   }
 
-  return (
-    <div className="flex items-center gap-1 rounded-full border border-white/25 p-0.5 text-xs">
-      {LOCALES.map((l) => (
-        <button
-          key={l}
-          type="button"
-          disabled={pending}
-          onClick={() => switchTo(l)}
-          aria-pressed={locale === l}
-          className={`rounded-full px-2.5 py-1 font-semibold transition ${
-            locale === l ? "bg-cyan-300 text-black" : "text-white/70 hover:text-white"
-          }`}
-        >
-          <span aria-hidden="true">{LABELS[l].flag}</span> {LABELS[l].code}
-        </button>
-      ))}
-    </div>
-  );
+  return <label className="relative flex items-center rounded-full border border-white/80 bg-white/60 px-2 text-xs font-bold text-[#06203f] shadow-sm" aria-label="Selecionar idioma">
+    <span aria-hidden="true">{LABELS[locale]?.flag ?? "🌐"}</span>
+    <select value={locale} disabled={pending} onChange={(event) => switchTo(event.target.value)} className="appearance-none bg-transparent py-2 pl-1 pr-4 outline-none" aria-label="Language">
+      {LOCALES.map((l) => <option key={l} value={l}>{LABELS[l].code}</option>)}
+    </select>
+    <span className="pointer-events-none absolute right-2">⌄</span>
+  </label>;
 }

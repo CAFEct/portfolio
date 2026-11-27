@@ -1,4 +1,4 @@
-export type ContactChannelKey = "gmail" | "discord" | "whatsapp" | "github";
+export type ContactChannelKey = "gmail" | "linkedin" | "whatsapp" | "github";
 
 export type ContactChannel = {
   key: ContactChannelKey;
@@ -11,7 +11,7 @@ export type ContactChannel = {
 
 export const CONTACT_CHANNELS: readonly ContactChannel[] = [
   { key: "gmail", label: "Gmail", image: "/contacts/gmail.gif", imageApng: "/contacts/gmail.png" },
-  { key: "discord", label: "Discord", image: "/contacts/discord.gif" },
+  { key: "linkedin", label: "LinkedIn", image: "/contacts/linkedin.gif" },
   { key: "whatsapp", label: "WhatsApp", image: "/contacts/whatsapp.gif" },
   { key: "github", label: "GitHub", image: "/contacts/github.gif" },
 ];

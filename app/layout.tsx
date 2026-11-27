@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Exo_2, Nunito_Sans } from "next/font/google";
-import { getLocale } from "next-intl/server";
 import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
-import { getSettings, DEFAULT_SETTINGS } from "@/lib/settings";
-import { pickLocalized } from "@/lib/i18n";
+import { DEFAULT_SETTINGS } from "@/lib/settings";
 import "./globals.css";
 
 const exo = Exo_2({
@@ -20,18 +18,9 @@ const nunito = Nunito_Sans({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
-  let settings = DEFAULT_SETTINGS;
-  try {
-    settings = await getSettings();
-  } catch {
-    // DB unavailable at build/request — fall back to defaults.
-  }
   return {
-    title: pickLocalized(settings.seo.title, settings.seo.titleEn, locale) || DEFAULT_SETTINGS.seo.title,
-    description:
-      pickLocalized(settings.seo.description, settings.seo.descriptionEn, locale) ||
-      DEFAULT_SETTINGS.seo.description,
+    title: DEFAULT_SETTINGS.seo.title,
+    description: DEFAULT_SETTINGS.seo.description,
   };
 }
 
@@ -45,10 +34,9 @@ function NavbarFallback() {
   );
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const locale = await getLocale();
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={locale} className={`${exo.variable} ${nunito.variable}`}>
+    <html lang="pt-BR" className={`${exo.variable} ${nunito.variable}`}>
       <body className="font-sans antialiased">
         <Suspense fallback={<NavbarFallback />}>
           <Navbar />

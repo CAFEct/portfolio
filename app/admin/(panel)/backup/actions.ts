@@ -13,8 +13,7 @@ import {
 import { requireAdmin } from "@/lib/admin";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-
-const TABLES = [certificates, projects, experiences, skills, videos, messages, siteSettings] as const;
+import type { PgTable } from "drizzle-orm/pg-core";
 
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === "object" && v !== null && !Array.isArray(v);
@@ -42,7 +41,7 @@ export async function importBackup(formData: FormData) {
     redirect("/admin/backup?error=" + encodeURIComponent("Formato de backup inválido."));
   }
 
-  const sections: [string, (typeof TABLES)[number]][] = [
+  const sections: [string, PgTable][] = [
     ["certificates", certificates],
     ["projects", projects],
     ["experiences", experiences],

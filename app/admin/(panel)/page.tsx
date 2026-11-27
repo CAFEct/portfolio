@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { connection } from "next/server";
 import { count } from "drizzle-orm";
 import { db } from "@/db";
 import { certificates, projects } from "@/db/schema";
@@ -52,6 +53,7 @@ function TopList({ title, items, label }: { title: string; items: { path: string
 }
 
 export default async function AdminDashboard() {
+  await connection();
   const [[{ certs }], [{ projects: projectCount }], unread, analytics] = await Promise.all([
     db.select({ certs: count() }).from(certificates),
     db.select({ projects: count() }).from(projects),

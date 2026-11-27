@@ -8,6 +8,15 @@ const optionalUrl = z
   .or(z.literal(""))
   .optional();
 
+// Gmail contact: accept a full http(s) link or a mailto: address.
+const optionalGmailUrl = z
+  .string()
+  .trim()
+  .max(500)
+  .refine((u) => /^https?:\/\//i.test(u) || /^mailto:/i.test(u), "Use um link http(s) ou mailto:")
+  .or(z.literal(""))
+  .optional();
+
 const requiredText = (max = 200) => z.string().trim().min(1).max(max);
 const optionalText = (max = 2000) => z.string().trim().max(max).optional();
 const intField = z.coerce.number().int().min(0).max(100000).optional();
@@ -85,18 +94,21 @@ export const contactSchema = z.object({
 export const settingsSchema = z.object({
   heroTitle: requiredText(200),
   heroTitleEn: optionalText(200),
+  heroTitleEs: optionalText(200),
   heroSubtitle: optionalText(1000),
   heroSubtitleEn: optionalText(1000),
+  heroSubtitleEs: optionalText(1000),
   aboutText: optionalText(5000),
   aboutTextEn: optionalText(5000),
+  aboutTextEs: optionalText(5000),
   email: z.string().trim().email().max(200).or(z.literal("")),
+  cvUrl: optionalUrl,
   socials: z.object({
     github: optionalUrl,
     youtube: optionalUrl,
     linkedin: optionalUrl,
     instagram: optionalUrl,
-    gmail: optionalUrl,
-    discord: optionalUrl,
+    gmail: optionalGmailUrl,
     whatsapp: optionalUrl,
   }),
   seo: z.object({

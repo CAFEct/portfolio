@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getAdminSession } from "@/lib/admin";
 import { signIn, signOut } from "@/auth";
+import { Suspense } from "react";
 
 async function login() {
   "use server";
@@ -17,6 +18,10 @@ export default async function AdminLoginPage({
 }: {
   searchParams: Promise<{ error?: string }>;
 }) {
+  return <Suspense fallback={<main className="grid min-h-screen place-items-center">Carregando…</main>}><AdminLoginContent searchParams={searchParams} /></Suspense>;
+}
+
+async function AdminLoginContent({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const { error } = await searchParams;
   const session = await getAdminSession();
   if (session) redirect("/admin");

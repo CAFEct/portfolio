@@ -30,7 +30,6 @@ export default async function BackupPage({
             Baixa um arquivo JSON com certificados, projetos, experiência, habilidades, vídeos, mensagens e
             configurações.
           </p>
-          {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- file download */}
           <a href="/api/admin/export" className="btn-aero mt-4 inline-flex">
             Baixar backup
           </a>

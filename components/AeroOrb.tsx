@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const bubbles = [
   { size: "2.5rem", top: "-6%", left: "30%", delay: "0s" },
   { size: "1.5rem", top: "8%", left: "72%", delay: "1.2s" },
@@ -9,12 +11,13 @@ const bubbles = [
 
 export default function AeroOrb() {
   return (
-    <div className="relative mx-auto w-fit" aria-hidden="true">
+    <div className="relative mx-auto w-fit px-4 py-8" aria-label="Foto de Gabriel Felipe">
       <div className="orb">
-        <span className="font-display text-6xl font-extrabold text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]">
-          CAFÉ
-        </span>
+        <Image src="/images/pfp.jpg" alt="Gabriel Felipe" fill sizes="(max-width: 768px) 75vw, 400px" onError={(event) => { event.currentTarget.style.display = "none"; }} />
+        <span className="absolute inset-0 grid place-items-center font-display text-6xl font-extrabold text-[#0b5ed7]/50">GF</span>
       </div>
+      <div className="glass absolute left-0 top-6 rounded-full px-4 py-3 text-sm font-bold">🎉 1+ ano de Experiência</div>
+      <div className="glass absolute bottom-6 right-0 rounded-full px-4 py-3 text-sm font-bold">⭐ 5+ Projetos Feitos</div>
       {bubbles.map((b, i) => (
         <span
           key={i}

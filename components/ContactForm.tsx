@@ -5,7 +5,7 @@ import { sendMessage, type ContactState } from "@/app/actions/contact";
 import { SubmitButton } from "@/components/admin/submit-button";
 
 const inputClass =
-  "w-full rounded-xl border border-white/25 bg-white/10 px-4 py-2.5 text-white placeholder-white/40 outline-none transition focus:border-cyan-300 focus:bg-white/15";
+  "w-full rounded-xl border border-sky-200 bg-white/80 px-4 py-2.5 text-[#06203f] placeholder-[#55738a] outline-none transition focus:border-sky-500 focus:bg-white";
 
 export type ContactLabels = {
   nome: string;
@@ -62,16 +62,16 @@ export default function ContactForm({
       <input type="hidden" name="locale" value={locale} />
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block text-sm">
-          <span className="mb-1 block text-white/75">{labels.nome}</span>
+          <span className="mb-1 block text-[#173b59]">{labels.nome}</span>
           <input name="name" required maxLength={120} className={inputClass} placeholder={labels.nomePlaceholder} />
         </label>
         <label className="block text-sm">
-          <span className="mb-1 block text-white/75">{labels.email}</span>
+          <span className="mb-1 block text-[#173b59]">{labels.email}</span>
           <input name="email" type="email" required maxLength={200} className={inputClass} placeholder={labels.emailPlaceholder} />
         </label>
       </div>
       <label className="block text-sm">
-        <span className="mb-1 block text-white/75">{labels.mensagem}</span>
+        <span className="mb-1 block text-[#173b59]">{labels.mensagem}</span>
         <textarea name="message" required minLength={10} maxLength={5000} rows={5} className={inputClass} placeholder={labels.mensagemPlaceholder} />
       </label>
       {state.error ? <p className="text-sm text-red-300">{state.error}</p> : null}
