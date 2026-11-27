@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "home": "Home",
+    "sobre": "Sobre",
+    "projetos": "Projetos",
+    "experiencia": "Experiência",
+    "habilidades": "Habilidades",
+    "videos": "Vídeos",
+    "certificados": "Certificados",
+    "contato": "Contato",
+    "admin": "Admin"
+  },
+  "home": {
+    "verProjetos": "Ver projetos",
+    "falarComigo": "Falar comigo",
+    "sobreTitulo": "Sobre mim",
+    "projetosTitulo": "Projetos",
+    "experienciaTitulo": "Experiência",
+    "habilidadesTitulo": "Habilidades",
+    "videosTitulo": "Vídeos",
+    "certificadosTitulo": "Certificados",
+    "certificadosTexto": "{count} certificados em desenvolvimento e gestão.",
+    "certificadosTextoVazio": "Certificados e formações.",
+    "verCertificados": "Ver certificados",
+    "verTodosProjetos": "Ver todos os projetos",
+    "contatoTitulo": "Vamos construir algo juntos?",
+    "contatoTexto": "Me chame para um projeto, uma parceria ou só para trocar ideia sobre código.",
+    "outrosProjetos": "Outros projetos"
+  },
+  "certificados": {
+    "titulo": "Certificados",
+    "encontrados": "{count} certificado(s) encontrado(s).",
+    "buscar": "Buscar",
+    "buscarPlaceholder": "Título ou emissor…",
+    "categoria": "Categoria",
+    "todas": "Todas",
+    "filtrar": "Filtrar",
+    "vazio": "Nenhum certificado encontrado. Tente outro termo.",
+    "pdf": "PDF",
+    "verificar": "Verificar",
+    "anterior": "← Anterior",
+    "proxima": "Próxima →",
+    "pagina": "{page} / {total}"
+  },
+  "projetos": {
+    "titulo": "Projetos",
+    "subtitulo": "Tudo que já construí, do e-commerce ao hardware.",
+    "voltar": "← Projetos",
+    "verProjeto": "Ver projeto",
+    "repositorio": "Repositório",
+    "vazio": "Nenhum projeto publicado ainda."
+  },
+  "contato": {
+    "nome": "Nome",
+    "nomePlaceholder": "Seu nome",
+    "email": "E-mail",
+    "emailPlaceholder": "voce@email.com",
+    "mensagem": "Mensagem",
+    "mensagemPlaceholder": "Como posso ajudar?",
+    "enviar": "Enviar mensagem",
+    "enviado": "Mensagem enviada! Obrigado pelo contato — respondo em breve.",
+    "erroValidacao": "Preencha nome, e-mail válido e uma mensagem (mín. 10 caracteres)."
+  },
+  "videos": {
+    "reproduzir": "Reproduzir vídeo: {title}"
+  }
+}

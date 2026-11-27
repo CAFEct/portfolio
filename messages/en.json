@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "home": "Home",
+    "sobre": "About",
+    "projetos": "Projects",
+    "experiencia": "Experience",
+    "habilidades": "Skills",
+    "videos": "Videos",
+    "certificados": "Certificates",
+    "contato": "Contact",
+    "admin": "Admin"
+  },
+  "home": {
+    "verProjetos": "View projects",
+    "falarComigo": "Get in touch",
+    "sobreTitulo": "About me",
+    "projetosTitulo": "Projects",
+    "experienciaTitulo": "Experience",
+    "habilidadesTitulo": "Skills",
+    "videosTitulo": "Videos",
+    "certificadosTitulo": "Certificates",
+    "certificadosTexto": "{count} certificates in development and management.",
+    "certificadosTextoVazio": "Certificates and education.",
+    "verCertificados": "View certificates",
+    "verTodosProjetos": "View all projects",
+    "contatoTitulo": "Let's build something together",
+    "contatoTexto": "Reach out for a project, a partnership, or just to talk code.",
+    "outrosProjetos": "Other projects"
+  },
+  "certificados": {
+    "titulo": "Certificates",
+    "encontrados": "{count} certificate(s) found.",
+    "buscar": "Search",
+    "buscarPlaceholder": "Title or issuer…",
+    "categoria": "Category",
+    "todas": "All",
+    "filtrar": "Filter",
+    "vazio": "No certificates found. Try another term.",
+    "pdf": "PDF",
+    "verificar": "Verify",
+    "anterior": "← Previous",
+    "proxima": "Next →",
+    "pagina": "{page} / {total}"
+  },
+  "projetos": {
+    "titulo": "Projects",
+    "subtitulo": "Everything I've built, from e-commerce to hardware.",
+    "voltar": "← Projects",
+    "verProjeto": "View project",
+    "repositorio": "Repository",
+    "vazio": "No projects published yet."
+  },
+  "contato": {
+    "nome": "Name",
+    "nomePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "you@email.com",
+    "mensagem": "Message",
+    "mensagemPlaceholder": "How can I help?",
+    "enviar": "Send message",
+    "enviado": "Message sent! Thanks for reaching out — I'll reply soon.",
+    "erroValidacao": "Please fill in your name, a valid email and a message (min. 10 characters)."
+  },
+  "videos": {
+    "reproduzir": "Play video: {title}"
+  }
+}

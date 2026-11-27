@@ -1,31 +1,33 @@
-const links = [
-  { label: "Home", href: "#home" },
-  { label: "Sobre", href: "#sobre" },
-  { label: "Projetos", href: "#projetos" },
-  { label: "Certificados", href: "#certificados" },
-  { label: "Contato", href: "#contato" },
+const bubbles = [
+  { size: "2.5rem", top: "-6%", left: "30%", delay: "0s" },
+  { size: "1.5rem", top: "8%", left: "72%", delay: "1.2s" },
+  { size: "2rem", top: "55%", left: "-8%", delay: "2s" },
+  { size: "1.25rem", top: "70%", left: "80%", delay: "0.6s" },
+  { size: "3rem", top: "30%", left: "-14%", delay: "1.6s" },
+  { size: "1.75rem", top: "85%", left: "45%", delay: "2.6s" },
 ];
 
-export default function Navbar() {
+export default function AeroOrb() {
   return (
-    <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
-      <nav aria-label="Principal" className="glass flex max-w-full items-center gap-1 rounded-full px-3 py-2">
-        <a href="#home" className="chrome-text px-3 font-display text-lg font-extrabold">
+    <div className="relative mx-auto w-fit" aria-hidden="true">
+      <div className="orb">
+        <span className="font-display text-6xl font-extrabold text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]">
           CAFÉ
-        </a>
-        <ul className="flex items-center gap-1 overflow-x-auto text-sm">
-          {links.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="block whitespace-nowrap rounded-full px-3 py-1.5 text-white/80 transition hover:bg-white/15 hover:text-white"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </header>
+        </span>
+      </div>
+      {bubbles.map((b, i) => (
+        <span
+          key={i}
+          className="bubble"
+          style={{
+            width: b.size,
+            height: b.size,
+            top: b.top,
+            left: b.left,
+            animationDelay: b.delay,
+          }}
+        />
+      ))}
+    </div>
   );
 }
